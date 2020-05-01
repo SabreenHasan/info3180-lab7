@@ -12,6 +12,9 @@ Vue.component('app-header', {
           <li class="nav-item active">
             <router-link class="nav-link" to="/">Home <span class="sr-only">(current)</span></router-link>
           </li>
+          <li class="nav-item active">
+            <router-link class="nav-link" to="/upload">Upload Image <span class="sr-only">(current)</span></route-link>
+          </li>
         </ul>
       </div>
     </nav>
@@ -40,6 +43,27 @@ const Home = Vue.component('home', {
     }
 });
 
+const photo_upload = Vue.component('upload', {
+    template: `
+     <div class="jumbotron">
+         <h1>Uploads</h1>
+         <div>
+            <form method="POST" enctype="multipart/form-data">
+                <div>
+                    <label id="descriptLabel" for="description">Description: </label>
+                    <textarea id="description" name="description"></textarea><br>
+                    <input id="photo" type="file" name="fileupload"/>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+         <div>      
+     </div>
+    `,
+     data: function() {
+        return {}
+     }
+ });
+
 const NotFound = Vue.component('not-found', {
     template: `
     <div>
@@ -57,6 +81,9 @@ const router = new VueRouter({
     routes: [
         {path: "/", component: Home},
         // Put other routes here
+
+        {path: "/upload/", component: photo_upload},
+        // Catch the file upload route
 
         // This is a catch all route in case none of the above matches
         {path: "*", component: NotFound}
