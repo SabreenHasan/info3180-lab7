@@ -1,3 +1,20 @@
 body {
     padding-top: 5rem;
+    font-family: Arial;
 }
+
+button {
+    border-radius: 5px;
+    background-color: blue;
+    color: white;
+}
+
+#photo {
+    border-radius: 5px;
+}
+
+#description {
+    width: 300px;
+    height: 300px;
+}
+
