@@ -77,6 +77,9 @@ const photo_upload = Vue.component('upload-form', {
      },
      methods: {
         uploadPhoto: function() {
+            let self = this;
+            let photoForm = document.getElementById('photoForm');
+            let formData = new FormData(photoForm);
             fetch("/api/upload", {
                 method: 'POST',
                 body: form_data,
@@ -90,10 +93,12 @@ const photo_upload = Vue.component('upload-form', {
                 })
                 .then(function (jsonResponse) {
                     console.log(jsonResponse);
+                    self.response = jsonResponse.result;
+                    self.error = jsonResponse.errors;
                 })
                 .catch(function (error) {
                     console.log(error);
-                });
+            });
         }
     }
 });
