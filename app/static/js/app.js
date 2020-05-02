@@ -47,8 +47,18 @@ const photo_upload = Vue.component('upload', {
     template: `
         <div class="jumbotron">
             <h1>Uploads</h1>
-            <div>
-                <form id="photoForm" method="POST" enctype="multipart/form-data">
+            <div class-"form-inline d-flex justify-content-center">
+                <ul class="list">
+                    <li v-for="resp in response" class="list">
+                        {{ resp.message }}
+                        {{ resp.filename }}
+                    </li>
+                    <li v-for="resp in error" class="list">
+                        {{ resp.error[0] }} <br>
+                        {{ resp.error[1] }}
+                    </li>
+                </ul>
+                <form id="photoForm" @ubmit.prevent="" method="POST" enctype="multipart/form-data">
                     <div>
                         <label id="descriptLabel" for="description">Description: </label><br>
                         <textarea id="description" name="description" placeholder="Add image decription here..."></textarea><br>
