@@ -43,11 +43,11 @@ const Home = Vue.component('home', {
     }
 });
 
-const photo_upload = Vue.component('upload', {
+const photo_upload = Vue.component('upload-form', {
     template: `
         <div class="jumbotron">
             <h1>Uploads</h1>
-            <div class-"form-inline d-flex justify-content-center">
+            <div class="form-inline d-flex justify-content-center">
                 <ul class="list">
                     <li v-for="resp in response" class="list">
                         {{ resp.message }}
@@ -58,7 +58,7 @@ const photo_upload = Vue.component('upload', {
                         {{ resp.error[1] }}
                     </li>
                 </ul>
-                <form id="photoForm" @ubmit.prevent="" method="POST" enctype="multipart/form-data">
+                <form id="photoForm" @submit.prevent="uploadPhoto" method="POST" enctype="multipart/form-data">
                     <div>
                         <label id="descriptLabel" for="description">Description: </label><br>
                         <textarea id="description" name="description" placeholder="Add image decription here..."></textarea><br>
@@ -75,7 +75,28 @@ const photo_upload = Vue.component('upload', {
             error: []
         };
      },
- });
+     methods: {
+        uploadPhoto: function() {
+            fetch("/api/upload", {
+                method: 'POST',
+                body: form_data,
+                headers: {
+                    'X-CSRFToken': token
+                },
+                credentials: 'same-origin'
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (jsonResponse) {
+                    console.log(jsonResponse);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    }
+});
 
 const NotFound = Vue.component('not-found', {
     template: `
